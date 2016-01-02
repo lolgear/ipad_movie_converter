@@ -2,11 +2,19 @@ use Getopt::Long;
 use Data::Dumper;
 use File::Spec;
 use File::Basename;
+sub alternativeOutputFile {
+	my $hash = shift;
+	my $infile = $hash->{infile};
+	my ($file, $directory) = fileparse($infile,'.avi');
+	File::Spec->catfile($directory, $file.'.mp4');
+}
+
 sub MainWork{
 	my $hash = shift;
 	my ($infile) = $hash->{'infile'};
-	my $infile_copy = fileparse($infile,'.avi');
-	my ($outfile) = $hash->{'outfile'} || ($infile_copy.'.mp4');
+	my $infile_copy = alternativeOutputFile({infile => $infile}); 
+	
+	my ($outfile) = $hash->{'outfile'} || ($infile_copy);
 
 	unless (-e $infile) {
 		my $error = Dumper $infile;
