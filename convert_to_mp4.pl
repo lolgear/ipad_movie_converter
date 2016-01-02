@@ -24,7 +24,7 @@ sub MainWork{
 	my $tool = 'ffmpeg';
 	my $before_options = '-fflags +genpts';
 	my $infile_string = qq(-i \"$infile\");
-	my $options = '-map 0:0 -map 0:1 -map 0:2 -c:a:0 mp3 -c:a:1 mp3 -vb 1000k';
+	my $options = '-map 0:0 -map 0:1 -map 0:2? -c:a:0 mp3 -c:a:1 mp3 -vb 1000k';
 	my $outfile_string = qq(\"$outfile\");
 	my $exec_string = join (' ', $tool, $before_options, $infile_string, $options, $outfile_string);
 	print "I will do: $exec_string\n";
